@@ -16,7 +16,7 @@ export class NodemailerService {
   });
 
   msfSucceffull_new_user: string =
-    "Tu usuario fue creado correctamente, puedes acceder por este link: https://spoot-front-andrewsando.vercel.app/registration-success";
+    "Tu usuario fue creado correctamente, puedes acceder";
   msPremiun_succefull_user: string =
     "Se te activo el premiun, felicidades: https://spoot-front-andrewsando.vercel.app/premium-success";
   msUpdate_password_user: string = "Se cambio exitosamente su password";
