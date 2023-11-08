@@ -40,7 +40,7 @@ export class NodemailerService {
       const info = await this.transporter.sendMail({
         from: `"EventoX" <${process.env.USERNODEMAILER}`,
         to: email,
-        subject: "Create new user suceffull",
+        subject: "Usuario registrado correctamente!",
         html: msfSucceffull_new_user,
       });
 
