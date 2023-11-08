@@ -1,9 +1,10 @@
 import * as nodemailer from "nodemailer";
 import * as dotenv from "dotenv";
 dotenv.config();
+import { msfSucceffull_new_user } from "./template"
 
 export class NodemailerService {
-  constructor() {}
+  constructor() { }
 
   transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -15,8 +16,8 @@ export class NodemailerService {
     },
   });
 
-  msfSucceffull_new_user: string =
-    "Tu usuario fue creado correctamente, puedes acceder";
+  /*   msfSucceffull_new_user: string =
+      "Tu usuario fue creado correctamente, puedes acceder"; */
   msPremiun_succefull_user: string =
     "Se te activo el premiun, felicidades: https://spoot-front-andrewsando.vercel.app/premium-success";
   msUpdate_password_user: string = "Se cambio exitosamente su password";
@@ -37,10 +38,10 @@ export class NodemailerService {
       if (!email) throw new Error("se necesita el email");
 
       const info = await this.transporter.sendMail({
-        from: `"Create new Users 👻" <${process.env.USERNODEMAILER}`,
+        from: `"EventoX" <${process.env.USERNODEMAILER}`,
         to: email,
         subject: "Create new user suceffull",
-        text: this.msfSucceffull_new_user,
+        html: msfSucceffull_new_user,
       });
 
       if (!info) throw new Error("Algo salio mal");
