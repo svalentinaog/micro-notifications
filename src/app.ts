@@ -18,4 +18,18 @@ app.get('/', async (req: Request, res: Response) => {
   res.status(201).json({ info });
 });
 
+/* CONFIRMACION POR MAIL DE COMPRA EXITOSA */
+
+app.get('/pay', async (req: Request, res: Response) => {
+  const { email } = req.query as { email: string } || { email: '' };
+
+  if (!email) {
+    return res.status(400).json({ error: "El parámetro 'email' es necesario." });
+  }
+
+  const info = await nodemailerService.payConfirmation(email);
+
+  res.status(201).json({ info });
+});
+
 export default app;

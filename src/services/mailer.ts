@@ -1,7 +1,7 @@
 import * as nodemailer from "nodemailer";
 import * as dotenv from "dotenv";
 dotenv.config();
-import { msfSucceffull_new_user } from "./template"
+import { NEW_USER_HTML, PAY_CONFIRMATION_HTML } from "./template"
 
 export class NodemailerService {
   constructor() { }
@@ -41,7 +41,25 @@ export class NodemailerService {
         from: `"EventoX" <${process.env.USERNODEMAILER}`,
         to: email,
         subject: "Usuario registrado correctamente!",
-        html: msfSucceffull_new_user,
+        html: NEW_USER_HTML,
+      });
+
+      if (!info) throw new Error("Algo salio mal");
+      return info;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async payConfirmation(email: string) {
+    try {
+      if (!email) throw new Error("se necesita el email");
+
+      const info = await this.transporter.sendMail({
+        from: `"EventoX" <${process.env.USERNODEMAILER}`,
+        to: email,
+        subject: "Tu compra se a procesado correctamente",
+        html: PAY_CONFIRMATION_HTML,
       });
 
       if (!info) throw new Error("Algo salio mal");
