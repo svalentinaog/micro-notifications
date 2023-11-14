@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express';
 import { NodemailerService } from './services/mailer';
+import cors from 'cors';
 
 const nodemailerService = new NodemailerService();
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
 app.get('/', async (req: Request, res: Response) => {
