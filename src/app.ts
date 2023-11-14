@@ -1,10 +1,16 @@
 import express, { Request, Response } from 'express';
 import { NodemailerService } from './services/mailer';
-import cors from 'cors';
 
 const nodemailerService = new NodemailerService();
 const app = express();
-app.use(cors());
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 app.use(express.json());
 
 app.get('/', async (req: Request, res: Response) => {
