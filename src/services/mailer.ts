@@ -51,6 +51,26 @@ export class NodemailerService {
     }
   }
 
+  async sendEmail({email, subject, data}:{email:string, subject:string, data:string}){
+    try {
+      if (!email) throw new Error("se necesita el email");
+
+      const info = await this.transporter.sendMail({
+        from: `"Portafolio" <${process.env.USERNODEMAILER}`,
+        to: 'ezequiel_developer@outlook.com',
+        subject: "Contacto Portafolio",
+        html: `<h1>${subject}</h1>
+        <p>Soy: ${email}, y ${data}</p>
+        `,
+      });
+
+      if (!info) throw new Error("Algo salio mal");
+      return info;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async payConfirmation(email: string) {
     try {
       if (!email) throw new Error("se necesita el email");
