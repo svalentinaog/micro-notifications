@@ -1,10 +1,10 @@
 import * as nodemailer from "nodemailer";
 import * as dotenv from "dotenv";
 dotenv.config();
-import { NEW_USER_HTML, PAY_CONFIRMATION_HTML } from "./template"
+import { NEW_USER_HTML, PAY_CONFIRMATION_HTML } from "./template";
 
 export class NodemailerService {
-  constructor() { }
+  constructor() {}
 
   transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -51,13 +51,21 @@ export class NodemailerService {
     }
   }
 
-  async sendEmail({email, subject, data}:{email:string, subject:string, data:string}){
+  async sendEmail({
+    email,
+    subject,
+    data,
+  }: {
+    email: string;
+    subject: string;
+    data: string;
+  }) {
     try {
       if (!email) throw new Error("se necesita el email");
 
       const info = await this.transporter.sendMail({
         from: `"Portafolio" <${process.env.USERNODEMAILER}`,
-        to: 'ezequiel_developer@outlook.com',
+        to: "svalentinaog10@gmail.com",
         subject: "Contacto Portafolio",
         html: `<h1>${subject}</h1>
         <p>Soy: ${email}, y ${data}</p>
